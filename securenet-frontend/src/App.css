@@ -1,0 +1,28 @@
+/* src/App.css */
+.App {
+  font-family: 'Segoe UI', sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  color: #0057b8;
+}
+
+header p {
+  font-size: 1rem;
+  color: #444;
+}
+
+footer {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  color: #777;
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+}
+
+

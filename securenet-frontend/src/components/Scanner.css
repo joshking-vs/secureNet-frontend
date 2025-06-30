@@ -1,0 +1,48 @@
+
+/* src/components/Scanner.css */
+.scanner-container {
+  max-width: 700px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fafafa;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+input {
+  width: 70%;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 1rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
+}
+
+.result {
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.flagged {
+  color: red;
+  font-weight: bold;
+}
+
+.safe {
+  color: green;
+  font-weight: bold;
+}
+
+.screenshot-preview {
+  margin-top: 1rem;
+}
