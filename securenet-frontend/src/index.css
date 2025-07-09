@@ -1,0 +1,56 @@
+/* PhishingChecker.css */
+.phishing-checker {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 12px;
+  background-color: rgb(167, 188, 195);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.phishing-checker h2 {
+  text-align: center;
+  color: #1a1616;
+}
+
+.phishing-checker textarea {
+  width: 100%;
+  height: 100px;
+  margin-top: 10px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #bbb;
+}
+
+.phishing-checker button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4caf50;
+  color: rgb(14, 12, 12);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.phishing-checker button:hover {
+  background-color: #388e3c;
+}
+
+.phishing-checker p {
+  margin-top: 20px;
+  font-size: 18px;
+}
+ 
+
+body {
+  background-color: lightblue;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
