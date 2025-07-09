@@ -1,6 +1,8 @@
 // import './index.css';
 import { useState } from 'react';
 import { checkPhishing } from './phishingApi';
+import { useState } from 'react';
+import { checkPhishing } from '../api/phishingApi';
 
 function PhishingChecker() {
   const [message, setMessage] = useState('');
@@ -13,12 +15,14 @@ function PhishingChecker() {
 
   return (
     <div className="phishing-checker">
+    <div>
       <h2>Phishing Message Checker</h2>
       <textarea value={message} onChange={e => setMessage(e.target.value)} />
       <button onClick={handleCheck}>Analyze</button>
       {result && (
         <p>
           <strong>{result.verdict.toUpperCase()}</strong> ({(result.confidence * 100).toFixed(2)}%)
+          <strong>{result.label.toUpperCase()}</strong> ({(result.score * 100).toFixed(2)}%)
         </p>
       )}
     </div>
