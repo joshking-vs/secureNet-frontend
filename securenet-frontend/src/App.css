@@ -24,5 +24,14 @@ footer {
   border-top: 1px solid #ccc;
   padding-top: 1rem;
 }
+/* Toast override to ensure visibility */
+.Toastify__toast-container,
+.Toastify__toast,
+.Toastify__toast-body {
+  z-index: 9999 !important;
+  opacity: 1 !important;
+  display: block !important;
+  pointer-events: all !important;
+}
 
 
