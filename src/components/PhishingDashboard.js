@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 
 const PhishingDashboard = () => {
+  // Always call hooks first!
   const [logs, setLogs] = useState([]);
   const [userIdFilter, setUserIdFilter] = useState('');
   const [submittedFilter, setSubmittedFilter] = useState('');
@@ -9,8 +10,12 @@ const PhishingDashboard = () => {
   const [endDate, setEndDate] = useState('');
   const [page, setPage] = useState(1);
   const [limit] = useState(10);
-  const [hoveredCol, setHoveredCol] = useState(null); // 👈 track hovered column
+  const [hoveredCol, setHoveredCol] = useState(null);
 
+  // Get user from localStorage (adjust if you use context or redux)
+  const user = JSON.parse(localStorage.getItem('user')) || {};
+
+  // ...rest of your code (fetchLogs, useEffect, handleExportCSV, etc.)...
   const fetchLogs = useCallback(async () => {
     try {
       const params = {
@@ -31,6 +36,15 @@ const PhishingDashboard = () => {
   useEffect(() => {
     fetchLogs();
   }, [fetchLogs]);
+
+    // Now you can safely check the role
+  if (user.role !== 'admin') {
+    return (
+      <div style={{ padding: '2rem', color: 'red', fontWeight: 'bold' }}>
+        Access Denied: You do not have permission to view this page.
+      </div>
+    );
+  }
 
   const handleExportCSV = () => {
     const headers = ['User ID', 'Email', 'Password', 'Submitted?', 'IP Address', 'User Agent', 'Timestamp'];
@@ -85,7 +99,7 @@ const PhishingDashboard = () => {
       <h3>📊 Phishing Logs Dashboard</h3>
 
       <div style={{ marginBottom: '1rem' }}>
-        <label>User ID: </label>
+        <label>Email: </label>
         <input value={userIdFilter} onChange={e => setUserIdFilter(e.target.value)} />
 
         <label style={{ marginLeft: '1rem' }}>Submitted: </label>
@@ -119,7 +133,7 @@ const PhishingDashboard = () => {
       >
         <thead>
           <tr>
-            {['User ID', 'Email', 'Password', 'Submitted?', 'IP', 'User Agent', 'Time'].map((header, i) => (
+            {['Email', 'Password', 'Submitted?', 'IP', 'User Agent', 'Time'].map((header, i) => (
               <th
                 key={i}
                 style={{
@@ -136,8 +150,9 @@ const PhishingDashboard = () => {
         </thead>
         <tbody>
           {logs.map((log, rowIndex) => (
+            <>
+            {console.log(log)}
             <tr key={rowIndex} style={{ backgroundColor: rowIndex % 2 === 0 ? '#fff' : '#f9f9f9' }}>
-              <td style={getColStyle(0)}>{log.user_id}</td>
               <td style={getColStyle(1)}>{log.email}</td>
               <td style={getColStyle(2)}>{log.password ? '••••••••' : 'N/A'}</td>
               <td style={getColStyle(3)}>{log.submitted_credentials ? '✅' : '❌'}</td>
@@ -145,6 +160,7 @@ const PhishingDashboard = () => {
               <td style={getColStyle(5)}>{log.user_agent}</td>
               <td style={getColStyle(6)}>{new Date(log.timestamp).toLocaleString()}</td>
             </tr>
+            </>
           ))}
         </tbody>
       </table>

