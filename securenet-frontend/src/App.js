@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 import PhishingChecker from './PhishingChecker';
 import PhishingChecker from './components/PhishingChecker';
