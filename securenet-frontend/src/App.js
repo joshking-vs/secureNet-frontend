@@ -1,16 +1,14 @@
-import logo from './logo.svg';
-import './App.css';
-import FileLog from './FileLog';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import BootstrapPractice from './test';
+import React from 'react';
+// Remove the .js extension from the import
+import FileLog from './components/FileLog';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './Dashboard.css';
 
 function App() {
   return (
     <div className="App">
-      <ToastContainer />
       <FileLog />
-      {/* <BootstrapPractice /> */}
     </div>
   );
 }
