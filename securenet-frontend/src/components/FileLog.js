@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import '../Dashboard.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import MonitorControl from './MonitorControl';
+import '../Dashboard.css';
 
 function FileLog() {
   // State
@@ -16,33 +19,34 @@ function FileLog() {
     suspicious: 0,
     dangerous: 0
   });
+  const [showMonitorControls, setShowMonitorControls] = useState(false);
   
   // Toggle dark mode
-const toggleDarkMode = () => {
-  const newMode = !isDarkMode;
-  setIsDarkMode(newMode);
-  localStorage.setItem('darkMode', newMode);
-  
-  // Apply to body and container
-  if (newMode) {
-    document.body.classList.add('dark-mode');
-    document.querySelector('.container-fluid').classList.add('dark-mode');
-  } else {
-    document.body.classList.remove('dark-mode');
-    document.querySelector('.container-fluid').classList.remove('dark-mode');
-  }
-};
+  const toggleDarkMode = () => {
+    const newMode = !isDarkMode;
+    setIsDarkMode(newMode);
+    localStorage.setItem('darkMode', newMode);
+    
+    // Apply to body and container
+    if (newMode) {
+      document.body.classList.add('dark-mode');
+      document.querySelector('.container-fluid').classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.querySelector('.container-fluid').classList.remove('dark-mode');
+    }
+  };
 
-// Also update the initial effect to apply to container
-useEffect(() => {
-  if (isDarkMode) {
-    document.body.classList.add('dark-mode');
-    document.querySelector('.container-fluid')?.classList.add('dark-mode');
-  } else {
-    document.body.classList.remove('dark-mode');
-    document.querySelector('.container-fluid')?.classList.remove('dark-mode');
-  }
-}, [isDarkMode]);
+  // Also update the initial effect to apply to container
+  useEffect(() => {
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+      document.querySelector('.container-fluid')?.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+      document.querySelector('.container-fluid')?.classList.remove('dark-mode');
+    }
+  }, [isDarkMode]);
   
   // Fetch logs from backend
   useEffect(() => {
@@ -192,6 +196,9 @@ useEffect(() => {
   
   return (
     <div className="container-fluid py-4">
+      {/* Toast notifications container */}
+      <ToastContainer position="top-right" autoClose={5000} />
+      
       {/* Header */}
       <div className="row mb-4">
         <div className="col-md-8">
@@ -206,6 +213,15 @@ useEffect(() => {
               </span>
             </div>
             <button 
+              className="btn btn-sm btn-outline-primary me-2" 
+              onClick={() => setShowMonitorControls(!showMonitorControls)}
+            >
+              {showMonitorControls ? 
+                <><i className="bi bi-gear-fill"></i> Hide Controls</> : 
+                <><i className="bi bi-gear"></i> Monitor Controls</>
+              }
+            </button>
+            <button 
               className="btn btn-sm btn-outline-primary" 
               onClick={toggleDarkMode}
             >
@@ -218,41 +234,44 @@ useEffect(() => {
         </div>
       </div>
       
+      {/* Monitor Controls (conditionally rendered) */}
+      {showMonitorControls && <MonitorControl isDarkMode={isDarkMode} />}
+      
       {/* Stats cards */}
       <div className="row mb-4">
-      <div className="col-md-3 mb-3">
-        <div className="card stats-card shadow-sm h-100">
-          <div className="card-body text-center">
-            <h5 className="card-title text-primary">Total Events</h5>
-            <h2 className="display-4 fw-bold text-primary">{stats.total}</h2>
+        <div className="col-md-3 mb-3">
+          <div className="card stats-card shadow-sm h-100">
+            <div className="card-body text-center">
+              <h5 className="card-title text-primary">Total Events</h5>
+              <h2 className="display-4 fw-bold text-primary">{stats.total}</h2>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 mb-3">
+          <div className="card stats-card shadow-sm h-100" style={{borderLeft: '6px solid var(--success-color)'}}>
+            <div className="card-body text-center">
+              <h5 className="card-title text-success">Safe</h5>
+              <h2 className="display-4 fw-bold text-success">{stats.safe}</h2>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 mb-3">
+          <div className="card stats-card shadow-sm h-100" style={{borderLeft: '6px solid var(--warning-color)'}}>
+            <div className="card-body text-center">
+              <h5 className="card-title text-warning">Suspicious</h5>
+              <h2 className="display-4 fw-bold text-warning">{stats.suspicious}</h2>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 mb-3">
+          <div className="card stats-card shadow-sm h-100" style={{borderLeft: '6px solid var(--danger-color)'}}>
+            <div className="card-body text-center">
+              <h5 className="card-title text-danger">Dangerous</h5>
+              <h2 className="display-4 fw-bold text-danger">{stats.dangerous}</h2>
+            </div>
           </div>
         </div>
       </div>
-      <div className="col-md-3 mb-3">
-        <div className="card stats-card shadow-sm h-100" style={{borderLeft: '6px solid var(--success-color)'}}>
-          <div className="card-body text-center">
-            <h5 className="card-title text-success">Safe</h5>
-            <h2 className="display-4 fw-bold text-success">{stats.safe}</h2>
-          </div>
-        </div>
-      </div>
-      <div className="col-md-3 mb-3">
-        <div className="card stats-card shadow-sm h-100" style={{borderLeft: '6px solid var(--warning-color)'}}>
-          <div className="card-body text-center">
-            <h5 className="card-title text-warning">Suspicious</h5>
-            <h2 className="display-4 fw-bold text-warning">{stats.suspicious}</h2>
-          </div>
-        </div>
-      </div>
-      <div className="col-md-3 mb-3">
-        <div className="card stats-card shadow-sm h-100" style={{borderLeft: '6px solid var(--danger-color)'}}>
-          <div className="card-body text-center">
-            <h5 className="card-title text-danger">Dangerous</h5>
-            <h2 className="display-4 fw-bold text-danger">{stats.dangerous}</h2>
-          </div>
-        </div>
-      </div>
-    </div>
       
       {/* Logs table */}
       <div className="card">
@@ -310,54 +329,54 @@ useEffect(() => {
                   </tr>
                 </thead>
                 <tbody>
-                {logs.map(log => (
-  <tr 
-    key={log.id}
-    className="log-entry"
-    style={{
-      borderLeft: `6px solid ${
-        log.risk_level === 'dangerous' ? 'var(--danger-color)' : 
-        log.risk_level === 'suspicious' ? 'var(--warning-color)' : 
-        'var(--success-color)'
-      }`,
-      color: isDarkMode ? 'var(--text-color)' : 'inherit'
-    }}
-  >
-    <td>
-      <div className="fw-bold" style={{ color: isDarkMode ? 'var(--text-color)' : 'inherit' }}>{getFileName(log.file_path)}</div>
-      <small className="text-muted" style={{ color: isDarkMode ? 'var(--text-color)' : 'inherit' }}>{log.file_path}</small>
-    </td>
-    <td>
-      <span className={`badge ${
-        log.change_type === 'created' ? 'bg-success' :
-        log.change_type === 'deleted' ? 'bg-danger' :
-        log.change_type === 'modified' ? 'bg-info' : 'bg-secondary'
-      }`}>
-        {log.change_type?.toUpperCase()}
-      </span>
-    </td>
-    <td>
-      <span className={`badge ${
-        log.risk_level === 'dangerous' ? 'bg-danger' : 
-        log.risk_level === 'suspicious' ? 'bg-warning text-dark' : 
-        'bg-success'
-      }`}>
-        {log.risk_level?.toUpperCase()}
-      </span>
-    </td>
-    <td style={{ color: isDarkMode ? 'var(--text-color)' : 'inherit' }}>{formatTime(log.timestamp)}</td>
-    <td>
-      {(log.risk_level === 'dangerous' || log.risk_level === 'suspicious') && (
-        <button 
-          className="btn btn-sm btn-outline-primary"
-          onClick={() => askChatGPT(log)}
-        >
-          <i className="bi bi-chat-dots me-1"></i>
-          Ask ChatGPT
-        </button>
-      )}
-    </td>
-  </tr>
+                  {logs.map(log => (
+                    <tr 
+                      key={log.id}
+                      className="log-entry"
+                      style={{
+                        borderLeft: `6px solid ${
+                          log.risk_level === 'dangerous' ? 'var(--danger-color)' : 
+                          log.risk_level === 'suspicious' ? 'var(--warning-color)' : 
+                          'var(--success-color)'
+                        }`,
+                        color: isDarkMode ? 'var(--text-color)' : 'inherit'
+                      }}
+                    >
+                      <td>
+                        <div className="fw-bold" style={{ color: isDarkMode ? 'var(--text-color)' : 'inherit' }}>{getFileName(log.file_path)}</div>
+                        <small className="text-muted" style={{ color: isDarkMode ? 'var(--text-color)' : 'inherit' }}>{log.file_path}</small>
+                      </td>
+                      <td>
+                        <span className={`badge ${
+                          log.change_type === 'created' ? 'bg-success' :
+                          log.change_type === 'deleted' ? 'bg-danger' :
+                          log.change_type === 'modified' ? 'bg-info' : 'bg-secondary'
+                        }`}>
+                          {log.change_type?.toUpperCase()}
+                        </span>
+                      </td>
+                      <td>
+                        <span className={`badge ${
+                          log.risk_level === 'dangerous' ? 'bg-danger' : 
+                          log.risk_level === 'suspicious' ? 'bg-warning text-dark' : 
+                          'bg-success'
+                        }`}>
+                          {log.risk_level?.toUpperCase()}
+                        </span>
+                      </td>
+                      <td style={{ color: isDarkMode ? 'var(--text-color)' : 'inherit' }}>{formatTime(log.timestamp)}</td>
+                      <td>
+                        {(log.risk_level === 'dangerous' || log.risk_level === 'suspicious') && (
+                          <button 
+                            className="btn btn-sm btn-outline-primary"
+                            onClick={() => askChatGPT(log)}
+                          >
+                            <i className="bi bi-chat-dots me-1"></i>
+                            Ask ChatGPT
+                          </button>
+                        )}
+                      </td>
+                    </tr>
                   ))}
                 </tbody>
               </table>

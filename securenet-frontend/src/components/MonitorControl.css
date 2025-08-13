@@ -1,0 +1,53 @@
+.monitor-control-container {
+    margin-bottom: 30px;
+  }
+  
+  .monitor-control-container .card-header {
+    background-color: var(--card-header-bg, #f8f9fa);
+  }
+  
+  .monitor-control-container.dark-mode .card-header {
+    background-color: var(--card-header-bg, #252525);
+  }
+  
+  .directory-management textarea {
+    font-family: monospace;
+    font-size: 14px;
+  }
+  
+  .current-directories .list-group-item {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-family: monospace;
+  }
+  
+  .monitor-control-container.dark-mode .current-directories .list-group-item {
+    background-color: var(--card-bg, #1e1e1e);
+    border-color: var(--border-color, #444444);
+  }
+  
+  .monitor-control-container.dark-mode .list-group-item-success {
+    background-color: rgba(40, 167, 69, 0.15) !important;
+    color: var(--text-color, #e0e0e0);
+  }
+  
+  .monitor-control-container.dark-mode .list-group-item-danger {
+    background-color: rgba(220, 53, 69, 0.15) !important;
+    color: var(--text-color, #e0e0e0);
+  }
+  
+  .monitor-actions .btn-group {
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  
+  @media (max-width: 768px) {
+    .monitor-actions .btn-group {
+      flex-direction: column;
+    }
+    
+    .monitor-actions .btn {
+      border-radius: 4px !important;
+      margin-bottom: 5px;
+    }
+  }
