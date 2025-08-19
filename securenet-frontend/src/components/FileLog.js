@@ -56,7 +56,7 @@ function FileLog() {
         setError(null);
         
         // Make the actual API call to your Django backend
-        const response = await axios.get('/api/file-logs/');
+        const response = await axios.get('/api/file-management/file-logs/');
         console.log('API response status:', response.status);
         
         // Check if we have data in the response
@@ -130,7 +130,7 @@ function FileLog() {
     fetchLogs();
     
     // Set up polling every 10 seconds
-    const interval = setInterval(fetchLogs, 10000);
+    const interval = setInterval(fetchLogs, 30000);
     
     // Clean up on unmount
     return () => clearInterval(interval);
@@ -154,7 +154,7 @@ function FileLog() {
   const askChatGPT = async (log) => {
     try {
       // Get a pre-built prompt from the backend
-      const response = await axios.get(`/api/file-logs/${log.id}/chatgpt_prompt/`);
+      const response = await axios.get(`/api/file-management/file-logs/${log.id}/chatgpt_prompt/`);
       const prompt = response.data.prompt;
       
       // URL encode the prompt
@@ -196,43 +196,29 @@ function FileLog() {
   
   return (
     <div className="container-fluid py-4">
-      {/* Toast notifications container */}
-      <ToastContainer position="top-right" autoClose={5000} />
-      
-      {/* Header */}
-      <div className="row mb-4">
-        <div className="col-md-8">
-          <h1 className="display-5 fw-bold text-primary">SecureNet</h1>
-          <p className="lead">File Security Monitoring</p>
-        </div>
-        <div className="col-md-4 text-end">
-          <div className="d-flex justify-content-end align-items-center">
-            <div className="me-3">
-              <span className="text-muted">
-                <i className="bi bi-clock me-1"></i> {new Date().toLocaleString()}
-              </span>
-            </div>
-            <button 
-              className="btn btn-sm btn-outline-primary me-2" 
-              onClick={() => setShowMonitorControls(!showMonitorControls)}
-            >
-              {showMonitorControls ? 
-                <><i className="bi bi-gear-fill"></i> Hide Controls</> : 
-                <><i className="bi bi-gear"></i> Monitor Controls</>
-              }
-            </button>
-            <button 
-              className="btn btn-sm btn-outline-primary" 
-              onClick={toggleDarkMode}
-            >
-              {isDarkMode ? 
-                <><i className="bi bi-sun"></i> Light Mode</> : 
-                <><i className="bi bi-moon"></i> Dark Mode</>
-              }
-            </button>
-          </div>
+    {/* Toast notifications container */}
+    <ToastContainer position="top-right" autoClose={5000} />
+    
+    {/* Simplified Header */}
+    <div className="row mb-4">
+      <div className="col-md-8">
+        <h2 className="fw-bold">File Security Monitoring</h2>
+        <p className="text-muted">Real-time file system activity monitoring and security analysis</p>
+      </div>
+      <div className="col-md-4 text-end">
+        <div className="d-flex justify-content-end align-items-center">
+          <button 
+            className="btn btn-sm btn-outline-primary" 
+            onClick={() => setShowMonitorControls(!showMonitorControls)}
+          >
+            {showMonitorControls ? 
+              <><i className="bi bi-gear-fill"></i> Hide Controls</> : 
+              <><i className="bi bi-gear"></i> Monitor Controls</>
+            }
+          </button>
         </div>
       </div>
+    </div>
       
       {/* Monitor Controls (conditionally rendered) */}
       {showMonitorControls && <MonitorControl isDarkMode={isDarkMode} />}

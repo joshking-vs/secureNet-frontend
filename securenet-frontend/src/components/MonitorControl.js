@@ -9,6 +9,7 @@ function MonitorControl({ isDarkMode }) {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
   
   // Get CSRF token
   const getCsrfToken = () => {
@@ -24,22 +25,31 @@ function MonitorControl({ isDarkMode }) {
     fetchMonitorStatus();
     
     // Set up polling to refresh status every 10 seconds
-    const intervalId = setInterval(fetchMonitorStatus, 10000);
     
+    
+    let intervalId;
+    if (!isEditing) {
+      intervalId = setInterval(fetchMonitorStatus, 10000);
+    }
     // Clean up interval on component unmount
-    return () => clearInterval(intervalId);
-  }, []);
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [isEditing]);
   
   const fetchMonitorStatus = async () => {
     try {
       setIsLoading(true);
-      const response = await axios.get('/api/monitor/status/');
+      const response = await axios.get('/api/file-management/monitor/status/');
       
       setMonitorStatus(response.data.status);
       
       if (response.data.monitored_paths) {
         setDirectories(response.data.monitored_paths);
+
+        if (!newDirectories.trim()) {
         setNewDirectories(response.data.monitored_paths.map(p => p.path).join('\n'));
+      }
       }
       
     } catch (err) {
@@ -57,7 +67,7 @@ function MonitorControl({ isDarkMode }) {
       setMessage('');
       setError('');
       
-      const response = await axios.post('/api/monitor/start/', {}, {
+      const response = await axios.post('/api/file-management/monitor/start/', {}, {
         headers: { 'X-CSRFToken': getCsrfToken() }
       });
       
@@ -83,7 +93,7 @@ function MonitorControl({ isDarkMode }) {
       setMessage('');
       setError('');
       
-      const response = await axios.post('/api/monitor/stop/', {}, {
+      const response = await axios.post('/api/file-management/monitor/stop/', {}, {
         headers: { 'X-CSRFToken': getCsrfToken() }
       });
       
@@ -109,7 +119,7 @@ function MonitorControl({ isDarkMode }) {
       setMessage('');
       setError('');
       
-      const response = await axios.post('/api/monitor/restart/', {}, {
+      const response = await axios.post('/api/file-management/monitor/restart/', {}, {
         headers: { 'X-CSRFToken': getCsrfToken() }
       });
       
@@ -145,7 +155,7 @@ function MonitorControl({ isDarkMode }) {
         return;
       }
       
-      const response = await axios.post('/api/monitor/update-directories/', {
+      const response = await axios.post('/api/file-management/monitor/update-directories/', {
         directories: dirList
       }, {
         headers: {
@@ -175,7 +185,7 @@ function MonitorControl({ isDarkMode }) {
       setMessage('');
       setError('');
       
-      const response = await axios.post('/api/monitor/run-scan/', {}, {
+      const response = await axios.post('/api/file-management/monitor/run-scan/', {}, {
         headers: { 'X-CSRFToken': getCsrfToken() }
       });
       
@@ -295,6 +305,8 @@ function MonitorControl({ isDarkMode }) {
               rows="4"
               value={newDirectories}
               onChange={(e) => setNewDirectories(e.target.value)}
+              onFocus={() => setIsEditing(true)}
+              onBlur={() => setIsEditing(false)}
               placeholder="C:\Users\Username\Documents&#10;C:\Users\Username\Downloads"
             ></textarea>
             <button
