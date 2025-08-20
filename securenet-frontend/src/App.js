@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import HomePage from './components/HomePage';
 import FileLog from './components/FileLog';
+import PhishingChecker from './components/PhishingChecker';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './Dashboard.css';
 import './App.css';
+
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(
@@ -35,12 +37,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage isDarkMode={isDarkMode} />} />
           <Route path="/file-monitoring" element={<FileLog isDarkMode={isDarkMode} />} />
-          <Route path="/phishing-detection" element={
-            <div className="container py-5 text-center">
-              <h2>Phishing Detection</h2>
-              <p>This feature is coming soon!</p>
-            </div>
-          } />
+          <Route path="/phishing-detection" element={<PhishingChecker isDarkMode={isDarkMode} />} />
           <Route path="/email-security" element={
             <div className="container py-5 text-center">
               <h2>Email Security</h2>

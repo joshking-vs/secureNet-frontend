@@ -4,6 +4,7 @@ import './index.css'; // If you have this file
 import App from './App.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
+import './components/PhishingChecker.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

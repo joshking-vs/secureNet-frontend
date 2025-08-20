@@ -45,10 +45,10 @@ function HomePage({ isDarkMode }) {
                 </div>
                 <h4 className="card-title mb-0">Phishing Detection</h4>
               </div>
-              <p className="card-text">Scan websites and URLs for phishing attempts and malicious content before visiting.</p>
+              <p className="card-text">Analyze incoming messages to identify and flag potential phishing attempts or suspicious content before users engage with them.</p>
               <Link to="/phishing-detection" className="btn btn-warning text-dark">
                 <i className="bi bi-arrow-right-circle me-1"></i>
-                Check Website
+                Message Security Check
               </Link>
             </div>
           </div>
