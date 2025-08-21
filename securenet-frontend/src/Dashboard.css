@@ -1,4 +1,4 @@
-/* Add or update these dark mode styles to properly style all components */
+/* Root Variables */
 :root {
   --primary-color: #4361ee;
   --success-color: #2ecc71;
@@ -11,35 +11,55 @@
   --card-header-bg: #f8f9fa;
   --border-color: #dee2e6;
 }
-/* Base dark mode styles */
+
+/* Base Dark Mode */
 .dark-mode {
   --text-color: #e0e0e0;
   --text-secondary: #b0b0b0;
   --bg-color: #121212;
   --card-bg: #1e1e1e;
+  --card-header-bg: #252525;
   --border-color: #444444;
   --table-hover-bg: rgba(255, 255, 255, 0.05);
   color: var(--text-color);
   background-color: var(--bg-color);
 }
 
-/* Card styles for dark mode */
+/* Card Styles */
+.card {
+  border-radius: 22px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  background-color: var(--card-bg);
+}
+
+.card-header {
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+  background-color: var(--card-header-bg);
+}
+
 .dark-mode .card {
   background-color: var(--card-bg);
   border-color: var(--border-color);
   color: var(--text-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .dark-mode .card-header {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--card-header-bg);
   border-color: var(--border-color);
 }
 
-.dark-mode .card-body {
-  background-color: var(--card-bg);
+/* Stats Cards */
+.stats-card {
+  border-radius: 22px;
+  overflow: hidden;
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-/* Stats cards in dark mode */
 .dark-mode .card-title {
   color: var(--text-color);
 }
@@ -64,7 +84,7 @@
   color: #9e9e9e !important;
 }
 
-/* Table styles for dark mode */
+/* Table Styles */
 .dark-mode .table {
   color: var(--text-color);
   border-color: var(--border-color);
@@ -84,74 +104,7 @@
   background-color: var(--table-hover-bg);
 }
 
-/* Fix for colored table rows in dark mode */
-.dark-mode .table-success {
-  background-color: rgba(76, 175, 80, 0.15) !important;
-  color: #e0e0e0;
-}
-
-.dark-mode .table-warning {
-  background-color: rgba(255, 152, 0, 0.15) !important;
-  color: #e0e0e0;
-}
-
-.dark-mode .table-danger {
-  background-color: rgba(244, 67, 54, 0.15) !important;
-  color: #e0e0e0;
-}
-
-/* Button styles in dark mode */
-.dark-mode .btn-outline-primary {
-  color: #90caf9;
-  border-color: #90caf9;
-}
-
-.dark-mode .btn-outline-primary:hover {
-  background-color: #90caf9;
-  color: #121212;
-}
-
-/* Alert styles in dark mode */
-.dark-mode .alert-info {
-  background-color: rgba(3, 169, 244, 0.15);
-  color: #81d4fa;
-  border-color: rgba(3, 169, 244, 0.2);
-}
-
-.dark-mode .alert-warning {
-  background-color: rgba(255, 152, 0, 0.15);
-  color: #ffcc80;
-  border-color: rgba(255, 152, 0, 0.2);
-}
-
-.dark-mode .alert-danger {
-  background-color: rgba(244, 67, 54, 0.15);
-  color: #ef9a9a;
-  border-color: rgba(244, 67, 54, 0.2);
-}
-
-/* Card styling enhancements */
-.card {
-  border-radius: 22px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  overflow: hidden;
-}
-
-.card-header {
-  border-top-left-radius: 12px !important;
-  border-top-right-radius: 12px !important;
-}
-
-/* Stats cards with improved styling */
-.stats-card {
-  border-radius: 22px;
-  overflow: hidden;
-  border: none !important;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-}
-
-/* Risk indicator styling - keeps card neutral with colored indicators */
+/* Risk Indicators */
 .risk-indicator {
   width: 6px;
   height: 100%;
@@ -173,78 +126,6 @@
   background-color: #e74c3c;
 }
 
-/* Dark mode enhancements */
-.dark-mode {
-  --text-color: #e0e0e0;
-  --text-secondary: #b0b0b0;
-  --bg-color: #121212;
-  --card-bg: #1e1e1e;
-  --card-header-bg: #252525;
-  --border-color: #444444;
-  --table-hover-bg: rgba(255, 255, 255, 0.05);
-  color: var(--text-color);
-  background-color: var(--bg-color);
-}
-
-/* Card styles for dark mode */
-.dark-mode .card {
-  background-color: var(--card-bg);
-  border-color: var(--border-color);
-  color: var(--text-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-.dark-mode .card-header {
-  background-color: var(--card-header-bg);
-  border-color: var(--border-color);
-}
-
-/* Stats cards in dark mode */
-.dark-mode .card-title {
-  color: var(--text-color);
-}
-
-.dark-mode .text-primary {
-  color: #90caf9 !important;
-}
-
-.dark-mode .text-success {
-  color: #81c784 !important;
-}
-
-.dark-mode .text-warning {
-  color: #ffb74d !important;
-}
-
-.dark-mode .text-danger {
-  color: #e57373 !important;
-}
-
-.dark-mode .text-muted {
-  color: #9e9e9e !important;
-}
-
-/* Table styles for dark mode */
-.dark-mode .table {
-  color: var(--text-color);
-  border-color: var(--border-color);
-}
-
-.dark-mode .table thead th {
-  border-color: var(--border-color);
-  color: var(--text-secondary);
-}
-
-.dark-mode .table td, 
-.dark-mode .table th {
-  border-color: var(--border-color);
-}
-
-.dark-mode .table-hover tbody tr:hover {
-  background-color: var(--table-hover-bg);
-}
-
-/* Risk indicators in table rows rather than full row coloring */
 tr.log-entry {
   position: relative;
   padding-left: 10px !important;
@@ -257,4 +138,84 @@ tr.log-entry {
 
 .dark-mode tr.log-entry:hover {
   background-color: var(--table-hover-bg) !important;
+}
+
+/* Buttons */
+.dark-mode .btn-outline-primary {
+  color: #90caf9;
+  border-color: #90caf9;
+}
+
+.dark-mode .btn-outline-primary:hover {
+  background-color: #90caf9;
+  color: #121212;
+}
+
+/* Alerts */
+.dark-mode .alert-info {
+  background-color: rgba(3, 169, 244, 0.15);
+  color: #81d4fa;
+  border-color: rgba(3, 169, 244, 0.2);
+}
+
+.dark-mode .alert-warning {
+  background-color: rgba(255, 152, 0, 0.15);
+  color: #ffcc80;
+  border-color: rgba(255, 152, 0, 0.2);
+}
+
+.dark-mode .alert-danger {
+  background-color: rgba(244, 67, 54, 0.15);
+  color: #ef9a9a;
+  border-color: rgba(244, 67, 54, 0.2);
+}
+
+/* ============================= */
+/* HOMEPAGE-SPECIFIC ADDITIONS   */
+/* ============================= */
+
+/* Homepage Header */
+.homepage-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.homepage-header p.lead {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+}
+
+/* Feature Cards */
+.card .card-body {
+  position: relative;
+}
+
+.card .rounded-circle {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+}
+
+/* Security Status Section */
+.security-status {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.security-status .text-center {
+  flex: 1;
+  min-width: 150px;
+}
+
+.security-status h5 {
+  margin-top: 0.5rem;
+  font-weight: 600;
+}
+
+.security-status p.small {
+  color: var(--text-secondary);
 }
