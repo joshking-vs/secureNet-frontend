@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Navigation.css";
 
 function Navigation({ isDarkMode, toggleDarkMode }) {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
@@ -9,10 +10,16 @@ function Navigation({ isDarkMode, toggleDarkMode }) {
   };
 
   return (
+    // Use navbar-fixed custom class for always-on-top navbar
     <nav
-      className={`navbar navbar-expand-lg ${
-        isDarkMode ? "navbar-dark bg-dark" : "navbar-light bg-light"
-      } mb-4`}
+      className={`navbar navbar-expand-lg  fixed-top  
+        navbar-dark bg-dark" 
+       mb-5`}
+      /* 
+        Bootstrap: navbar, navbar-expand-lg, navbar-dark/bg-dark or navbar-light/bg-light
+        Custom: fixed-top (see Navigation.css)
+        mb-4: margin bottom for spacing below navbar
+      */
     >
       <div className="container-fluid">
         {/* Brand */}
@@ -52,24 +59,13 @@ function Navigation({ isDarkMode, toggleDarkMode }) {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/email-security" onClick={() => setIsNavExpanded(false)}>
-                Email Security
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/login" onClick={() => setIsNavExpanded(false)}>
-                Login
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/signup" onClick={() => setIsNavExpanded(false)}>
-                Signup
+              <Link className="nav-link" to="/url-scanner" onClick={() => setIsNavExpanded(false)}>
+                Clone Site Detection
               </Link>
             </li>
           </ul>
-
-          {/* Dark/Light toggle button */}
-          <div className="d-flex">
+          {/* Light/Dark toggle button */}
+          {/* <div className="d-flex">
             <button
               className={`btn btn-sm ${isDarkMode ? "btn-light" : "btn-dark"}`}
               onClick={toggleDarkMode}
@@ -84,7 +80,7 @@ function Navigation({ isDarkMode, toggleDarkMode }) {
                 </>
               )}
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </nav>

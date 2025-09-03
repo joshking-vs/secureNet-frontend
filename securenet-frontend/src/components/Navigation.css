@@ -1,0 +1,26 @@
+/* Always-on-top fixed navbar */
+.navbar-fixed {
+    position: fixed;      /* Fixes navbar at top of viewport */
+    top: 0;               /* Always at top */
+    left: 0;
+    width: 100vw;         /* Full viewport width */
+    z-index: 1100;        /* Sits above all normal content */
+  }
+  
+  /* Add shadow/border to navbar for separation */
+  .navbar {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10); /* Editable: navbar shadow */
+    border-bottom: 1px solid var(--border-color, #22262b); /* Editable: border */
+  }
+  
+  /* Push page content down so it's not hidden by the fixed navbar */
+  body {
+    padding-top: 72px; /* Set this to your navbar's height */
+  }
+  
+  /* Responsive support (optional) */
+  @media (max-width: 900px) {
+    body {
+      padding-top: 62px; /* Adjust for shorter mobile navbar if needed */
+    }
+  }

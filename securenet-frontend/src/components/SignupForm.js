@@ -1,10 +1,9 @@
-// src/components/SignupForm.jsx
 import React, { useState, useEffect } from "react";
 import api from "../api/axios";
 import { getCSRFToken } from "../utils/csrf";
 import { toast } from "react-toastify";
 
-const SignupForm = () => {
+const SignupForm = ({ onAuth }) => {
   const [form, setForm] = useState({
     username: "",
     email: "",
@@ -17,7 +16,6 @@ const SignupForm = () => {
   };
 
   useEffect(() => {
-    // Automatically fetch CSRF token on component mount
     getCSRFToken()
       .then(() => console.log("✅ CSRF token retrieved."))
       .catch(() => toast.error("❌ Could not get CSRF token."));
@@ -30,7 +28,7 @@ const SignupForm = () => {
       const response = await api.post("auth/signup/", form);
       setMessage(response.data.message || "Signup successful!");
       toast.success("✅ Signup successful!");
-      console.log(response.data);
+      if (onAuth) onAuth();
     } catch (err) {
       setMessage("Signup failed.");
       toast.error("❌ Signup failed!");
@@ -39,39 +37,15 @@ const SignupForm = () => {
   };
 
   return (
-    <div>
+    <form onSubmit={handleSubmit} className="auth-form">
       <h2>Sign Up</h2>
-      <form onSubmit={handleSubmit} className="auth-form">
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={form.username}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={form.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">Sign Up</button>
-      </form>
-      <p>{message}</p>
-    </div>
+      <input className="form-control rounded-5" type="text" name="username" placeholder="Username" value={form.username} onChange={handleChange} required />
+      <input className="form-control" type="email" name="email" placeholder="Email" value={form.email} onChange={handleChange} required />
+      <input className="form-control" type="password" name="password" placeholder="Password" value={form.password} onChange={handleChange} required />
+      <button type="submit" className="btn btn-success">Sign Up</button>
+      <p className="text-center text-muted">{message}</p>
+    </form>
   );
 };
 
 export default SignupForm;
-

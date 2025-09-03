@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import api from '../api/axios';
 import { getCSRFToken } from '../utils/csrf';
 
-function LoginForm() {
+function LoginForm({ onAuth }) {
   const [form, setForm] = useState({ username: '', password: '' });
   const [message, setMessage] = useState('');
 
@@ -18,6 +17,7 @@ function LoginForm() {
     try {
       const response = await api.post('auth/login/', form);
       setMessage('Login successful!');
+      onAuth();
     } catch (err) {
       setMessage('Login failed.');
       console.error(err);
@@ -25,12 +25,12 @@ function LoginForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="auth-form">
       <h2>Login</h2>
-      <input name="username" placeholder="Username" onChange={handleChange} required />
-      <input name="password" type="password" placeholder="Password" onChange={handleChange} required />
-      <button type="submit">Login</button>
-      <p>{message}</p>
+      <input className="form-control" name="username" placeholder="Username" onChange={handleChange} required />
+      <input className="form-control" name="password" type="password" placeholder="Password" onChange={handleChange} required />
+      <button type="submit" className="btn btn-primary">Login</button>
+      <p className="text-center text-muted">{message}</p>
     </form>
   );
 }

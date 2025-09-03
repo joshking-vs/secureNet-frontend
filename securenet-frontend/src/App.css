@@ -4,9 +4,10 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  width: 100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 56;
+  /* height: 100%;
+  width: 100%; */
+  font-family: 'Oswald', 'Roboto', 'Bebas Neue', 'Pacifico', 'Dancing Script', sans-serif;
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: background-color 0.3s ease, color 0.3s ease;
@@ -50,6 +51,8 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: absolute;
+  top: 0;
 }
 
 .navbar a {

@@ -12,31 +12,30 @@ import URLScanner from "./URLScanner";
 // 🏠 HomePage Component
 function HomePage({ isDarkMode }) {
   return (
-    <div className={`container py-4 ${isDarkMode ? "dark-mode" : ""}`}>
-      <div className="row mb-5">
+    <div className={`container-fluid py-4 full-page-bg ${isDarkMode ? "dark-mode" : ""}`}>
+      <div className="row mb-4">
         <div className="col-md-12 text-center">
-          <h1 className="display-4 fw-bold text-primary mb-3">
-            <i className="bi bi-shield-check me-2"></i>
+          <h1 className="display-4 fw-bold text-primary mb-3 mt-5">
+            <i className="bi bi-shield-check me-2 "></i>
             SecureNet Security Suite
           </h1>
-          <p className="lead mb-4">
+          <p className="text-white mb-4 ">
             Comprehensive cybersecurity monitoring and protection for your
             digital assets
           </p>
-          <p className="text-muted mb-4">
+          <p className="text-white mb-4">
             Current Date and Time: {new Date().toLocaleString()}
           </p>
         </div>
       </div>
 
       {/* Features Section */}
-      <div className="row mb-5">
+      <div className="dashboard-features d-flex flex-wrap justify-content-center gap-3 mb-4">
         {/* File Monitoring */}
         <div className="col-md-3 mb-4">
           <div
-            className={`card h-100 shadow-sm ${
-              isDarkMode ? "bg-dark text-light border-secondary" : ""
-            }`}
+            className={`card h-100 shadow-sm 
+              bg-dark text-light border-secondary`}
           >
             <div className="card-body">
               <div className="d-flex align-items-center mb-3">
@@ -60,9 +59,8 @@ function HomePage({ isDarkMode }) {
         {/* Phishing Detection */}
         <div className="col-md-3 mb-4">
           <div
-            className={`card h-100 shadow-sm ${
-              isDarkMode ? "bg-dark text-light border-secondary" : ""
-            }`}
+            className={`card h-100 shadow-sm bg-dark text-light border-secondary
+            `}
           >
             <div className="card-body">
               <div className="d-flex align-items-center mb-3">
@@ -86,38 +84,13 @@ function HomePage({ isDarkMode }) {
           </div>
         </div>
 
-        {/* Email Security */}
-        <div className="col-md-3 mb-4">
-          <div
-            className={`card h-100 shadow-sm ${
-              isDarkMode ? "bg-dark text-light border-secondary" : ""
-            }`}
-          >
-            <div className="card-body">
-              <div className="d-flex align-items-center mb-3">
-                <div className="p-3 rounded-circle bg-success text-white me-3">
-                  <i className="bi bi-envelope-check"></i>
-                </div>
-                <h4 className="card-title mb-0">Email Security</h4>
-              </div>
-              <p className="card-text">
-                Analyze email messages for threats, spam, and phishing attempts
-                to protect your inbox.
-              </p>
-              <Link to="/email-security" className="btn btn-success">
-                <i className="bi bi-arrow-right-circle me-1"></i>
-                Scan Email
-              </Link>
-            </div>
-          </div>
-        </div>
+        
 
         {/* 🆕 Clone-Site Detection */}
         <div className="col-md-3 mb-4">
           <div
-            className={`card h-100 shadow-sm ${
-              isDarkMode ? "bg-dark text-light border-secondary" : ""
-            }`}
+            className={`card h-100 shadow-sm 
+              bg-dark text-light border-secondary`}
           >
             <div className="card-body">
               <div className="d-flex align-items-center mb-3">
@@ -130,7 +103,7 @@ function HomePage({ isDarkMode }) {
                 Detect fraudulent websites that mimic real ones to steal
                 credentials or trick users.
               </p>
-              <Link to="/clone-site-detection" className="btn btn-danger">
+              <Link to="/URL-scanner" className="btn btn-danger">
                 <i className="bi bi-arrow-right-circle me-1"></i>
                 Detect Clone Sites
               </Link>
@@ -143,9 +116,8 @@ function HomePage({ isDarkMode }) {
       <div className="row">
         <div className="col-md-12">
           <div
-            className={`card shadow-sm ${
-              isDarkMode ? "bg-dark text-light border-secondary" : ""
-            }`}
+            className={`card shadow-sm 
+              bg-dark text-light border-secondary`}
           >
             <div className="card-body">
               <h4 className="card-title">Security Status</h4>
@@ -188,12 +160,12 @@ function App() {
     
       <div>
         {/* 🧭 Navigation Bar */}
-        <header>
+        {/* <header>
           <nav>
             <Link to="/">Home</Link> | <Link to="/login">Login</Link> |{" "}
             <Link to="/signup">Signup</Link> |{" "}
           </nav>
-        </header>
+        </header> */}
 
         <main>
           <Routes>

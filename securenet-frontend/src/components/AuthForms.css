@@ -1,0 +1,82 @@
+/* Fullscreen container for auth page */
+.auth-fullscreen-container {
+    min-height: 100vh;       /* Always fill vertical space */
+    min-width: 100vw;        /* Always fill horizontal space */
+    display: flex;           /* Use flexbox for alignment */
+    flex-direction: column;  /* Stack everything vertically */
+    align-items: center;     /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    background: #20222d;     /* Editable: dark background (edit as needed) */
+  }
+  
+  /* Auth card (form box) */
+  .auth-card {
+    width: 60vw;                /* Always fill viewport width */
+    max-width: 500px;             /* Remove max width constraint */
+    height: 60vh;               /* Fill viewport height */
+    border-radius: 30px;            /* Editable: remove rounded corners for fullscreen look */
+    box-shadow: 10px 10px 10px 10px  black;           /* Editable: remove shadow for fullscreen */
+    background: rgba(22, 24, 31, 0.427);         /* Editable: card background (edit as needed) */
+    padding: 25px;                  /* Remove padding for fullscreen */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  /* Switcher buttons row */
+  .switcher-btns {
+    margin-top: 2rem;    /* Editable: space above switcher buttons */
+    margin-bottom: 2rem; /* Editable: space below switcher buttons */
+    gap: 20px;
+    width: 100%;
+   
+  }
+  
+  /* Auth form input styling */
+  .auth-form input {
+    margin-bottom: 1.25rem;     /* Editable: space between inputs */
+    font-size: 1.1rem;          /* Editable: input font size */
+    padding: 0.85rem; 
+    border-radius: 30px;           /* Editable: input padding */
+    color: #f7f9fb;
+  }
+  
+  /* Auth form button styling */
+  .auth-form button {
+    width: 100%;                /* Button fills form width */
+    padding: 0.85rem;           /* Editable: button padding */
+    font-size: 1.05rem;         /* Editable: button font size */
+    font-weight: 600;           /* Editable: button font weight */
+    margin-bottom: 1.25rem;     /* Editable: space below button */
+    border-radius: 30px;
+  }
+  
+  /* Heading styling */
+  .auth-form h2 {
+    margin-bottom: 1.5rem;      /* Editable: space below heading */
+    font-weight: 700;           /* Editable: heading weight */
+    text-align: center; 
+    color: #f7f9fb;        /* Center heading */
+  }
+  
+  /* Message styling */
+  .auth-form p {
+    text-align: center;         /* Center message */
+    color: #3d3d3d;                /* Editable: muted color */
+  }
+  
+  @media (max-width: 768px) {
+    
+  }
+  
+  /* Dark mode support (optional, can refine) */
+  body[data-theme="dark"] .auth-fullscreen-container {
+    background: #181c22;        /* Editable: dark background */
+  }
+  
+  body[data-theme="dark"] .auth-card {
+    background: #22262b;        /* Editable: dark card bg */
+    color: #f7f9fb;             /* Editable: light text */
+  }

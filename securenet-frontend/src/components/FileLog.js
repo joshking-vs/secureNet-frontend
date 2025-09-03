@@ -202,13 +202,13 @@ function FileLog() {
     {/* Simplified Header */}
     <div className="row mb-4">
       <div className="col-md-8">
-        <h2 className="fw-bold">File Security Monitoring</h2>
+        <h2 className="fw-bold mt-5">File Security Monitoring</h2>
         <p className="text-muted">Real-time file system activity monitoring and security analysis</p>
       </div>
       <div className="col-md-4 text-end">
         <div className="d-flex justify-content-end align-items-center">
           <button 
-            className="btn btn-sm btn-outline-primary" 
+            className="btn btn-sm btn-outline-primary mt-5 rounded-5" 
             onClick={() => setShowMonitorControls(!showMonitorControls)}
           >
             {showMonitorControls ? 
